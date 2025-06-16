@@ -1,7 +1,7 @@
 require('dotenv').config();
 export default {
   server: {
-    port: 3009, // Hoặc bất kỳ port nào bạn muốn
+    port: 3011, // Hoặc bất kỳ port nào bạn muốn
     host: '0.0.0.0'
   },
   serverMiddleware: ['~/serverMiddleware/sitemap.js'],
