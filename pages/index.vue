@@ -96,7 +96,7 @@
 </template>
 
 <script>
-const DOMAIN = process.env.DOMAIN_API ?? "http://103.159.51.131:3001/";
+const DOMAIN = process.env.DOMAIN_API ?? "https://api.dailychill.vn/";
 import MenuRight from "../components/MenuRight.vue";
 import GreetingPopup from '~/components/GreetingPopup.vue';
 import main from "~/mixins/main";

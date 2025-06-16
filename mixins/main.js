@@ -1,4 +1,4 @@
-const DOMAIN = process.env.DOMAIN_API ?? "http://103.159.51.131:3001/";
+const DOMAIN = process.env.DOMAIN_API ?? "https://api.dailychill.vn/";
 export default {
     data() {
       return {};

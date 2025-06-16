@@ -5,7 +5,7 @@ module.exports = async function (req, res, next) {
   if (req.url !== '/sitemap.xml') return next();
 
   const hostname = process.env.DOMAIN?.replace(/\/$/, '') || 'https://dailychill.vn';
-  const apiURL = process.env.DOMAIN_API?.replace(/\/$/, '') || 'http://103.159.51.131:3001';
+  const apiURL = process.env.DOMAIN_API?.replace(/\/$/, '') || 'https://api.dailychill.vn';
   const limit = 50;
 
   let page = 1;
