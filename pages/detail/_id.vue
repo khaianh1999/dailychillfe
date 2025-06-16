@@ -55,7 +55,7 @@
 <script>
 import CommentForm from '~/components/CommentForm.vue'
 import CommentList from '~/components/CommentList.vue'
-const DOMAIN = process.env.DOMAIN_API ?? "http://localhost:3001/";
+const DOMAIN = process.env.DOMAIN_API ?? "http://103.159.51.131:3001/";
 import main from "~/mixins/main";
 export default {
     layout: 'Main',

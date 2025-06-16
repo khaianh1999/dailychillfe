@@ -4,8 +4,8 @@ const axios = require('axios');
 module.exports = async function (req, res, next) {
   if (req.url !== '/sitemap.xml') return next();
 
-  const hostname = process.env.DOMAIN?.replace(/\/$/, '') || 'http://localhost:3000';
-  const apiURL = process.env.DOMAIN_API?.replace(/\/$/, '') || 'http://localhost:3001';
+  const hostname = process.env.DOMAIN?.replace(/\/$/, '') || 'https://dailychill.vn';
+  const apiURL = process.env.DOMAIN_API?.replace(/\/$/, '') || 'http://103.159.51.131:3001';
   const limit = 50;
 
   let page = 1;
