@@ -1,0 +1,31 @@
+{
+  "name": "blogPage",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
+    "@fortawesome/free-brands-svg-icons": "^6.7.1",
+    "@fortawesome/free-regular-svg-icons": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@fortawesome/vue-fontawesome": "^2.0.6",
+    "@nuxtjs/axios": "^5.13.6",
+    "cookie": "^0.4.2",
+    "core-js": "^3.25.3",
+    "dotenv": "^16.5.0",
+    "flowbite": "^2.5.2",
+    "nuxt": "^2.15.8",
+    "vue": "^2.7.10",
+    "vue-owl-carousel": "^2.0.3",
+    "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.10"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.16"
+  }
+}
