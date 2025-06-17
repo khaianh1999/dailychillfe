@@ -204,9 +204,16 @@
               <div class="sm:col-span-2">
                 <label for="add-content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nội
                   dung</label>
-                <textarea v-model="newPost.content" id="add-content" rows="4"
+                <client-only>
+                <ckeditor
+                    :editor="editor"
+                    v-model="newPost.content"
+                    :config="editorConfig"
+                />
+                </client-only>
+                <!-- <textarea v-model="newPost.content" id="add-content" rows="4"
                   class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                  required></textarea>
+                  required></textarea> -->
               </div>
               <!-- Hidden input for updated_by -->
               <input type="hidden" v-model="newPost.updated_by">
@@ -282,9 +289,16 @@
               <div class="sm:col-span-2">
                 <label for="edit-content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nội
                   dung</label>
-                <textarea v-model="editPost.content" id="edit-content" rows="4"
+                <client-only>
+                  <ckeditor
+                      :editor="editor"
+                      v-model="editPost.content"
+                      :config="editorConfig"
+                  />
+                </client-only>
+                <!-- <textarea v-model="editPost.content" id="edit-content" rows="4"
                   class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                  required></textarea>
+                  required></textarea> -->
               </div>
               <!-- Hidden input for updated_by -->
               <input type="hidden" v-model="editPost.updated_by">
@@ -336,13 +350,26 @@
 <script>
 const DOMAIN = process.env.DOMAIN_API ?? "https://api.dailychill.vn/";
 import main from "~/mixins/main";
+import CKEditor from '@ckeditor/ckeditor5-vue2';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   name: 'ArticlesPage',
   layout: "Admin",
   mixins: [main],
+  components: {
+    ckeditor: CKEditor.component
+  },
   data() {
     return {
+      editor: ClassicEditor,
+      editorConfig: {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+          'blockQuote', 'insertTable', 'undo', 'redo'
+        ]
+      },
       allPosts: [], // Lưu trữ toàn bộ danh sách bài đăng gốc
       searchQuery: '', // Dữ liệu cho ô tìm kiếm
       currentPage: 1,

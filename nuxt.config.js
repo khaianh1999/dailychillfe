@@ -52,6 +52,7 @@ export default {
   plugins: [
     '~/plugins/fontawesome.js',
     { src: "~/plugins/carousel.js", ssr: false },
+    { src: "~/plugins/ckeditor.js", ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

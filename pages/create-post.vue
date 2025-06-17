@@ -31,8 +31,15 @@
 
                     <div>
                         <label for="content" class="block mb-2 text-sm font-medium text-gray-700">Nội dung</label>
-                        <textarea v-model="newPost.content" id="content" rows="6" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"></textarea>
+                        <client-only>
+                        <ckeditor
+                            :editor="editor"
+                            v-model="newPost.content"
+                            :config="editorConfig"
+                        />
+                        </client-only>
+                        <!-- <textarea v-model="newPost.content" id="content" rows="6" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"></textarea> -->
                     </div>
 
                     <input type="hidden" v-model="newPost.updated_by" />
@@ -63,12 +70,15 @@
 const DOMAIN = process.env.DOMAIN_API ?? "https://api.dailychill.vn/";
 import main from "~/mixins/main";
 import Youtube from "../components/Youtube.vue";
+import CKEditor from '@ckeditor/ckeditor5-vue2';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export default {
     name: "CreatePostPage",
     layout: "Main",
     mixins: [main],
     components: {
         Youtube,
+        ckeditor: CKEditor.component,
     },
     data() {
         return {
@@ -86,6 +96,14 @@ export default {
             selectedAddFile: null,
             categories: [], // Assume fetched from API
             isSubmitting: false,
+            editor: ClassicEditor,
+            editorConfig: {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                    'blockQuote', 'insertTable', 'undo', 'redo'
+                ]
+            },
         };
     },
     async mounted() {
