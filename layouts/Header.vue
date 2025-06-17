@@ -45,7 +45,7 @@
                 </div>
 
                 <!-- Mobile menu button -->
-                <button @click="toggleMenu" class="md:hidden text-white focus:outline-none">
+                <button @click="toggleMenu" ref="toggleMenu" class="md:hidden text-white focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 6h16M4 12h16M4 18h16" />
@@ -55,10 +55,10 @@
         </nav>
 
         <!-- Mobile menu -->
-        <div v-if="isOpen" class="md:hidden px-4 pb-4">
+        <div v-if="isOpen" ref="menuMobile" class="md:hidden px-4 pb-4">
             <ul class="space-y-2 text-sm font-medium">
                 <li v-for="item in navItems" :key="item.path">
-                    <NuxtLink :to="item.path" class="block py-1 hover:text-hover">{{item.label}}</NuxtLink>
+                    <NuxtLink  @click.native="isOpen = false" :to="item.path" class="block py-1 hover:text-hover">{{item.label}}</NuxtLink>
                 </li>
               
             </ul>
@@ -110,8 +110,19 @@ export default {
                 !dropdown.contains(event.target) &&
                 toggle &&
                 !toggle.contains(event.target)
-                ) {
+            ) {
                 this.dropdownOpen = false;
+            }
+
+            const menuMobile = this.$refs.menuMobile;
+            const toggleMenu = this.$refs.toggleMenu; // Nút mở menu mobile, ví dụ hamburger button
+            if (
+                menuMobile &&
+                !menuMobile.contains(event.target) &&
+                toggleMenu &&
+                !toggleMenu.contains(event.target)
+            ) {
+                this.isOpen = false;
             }
         },
         logout() {

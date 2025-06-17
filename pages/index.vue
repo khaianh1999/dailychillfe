@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-[56px]">
+  <div class="mt-[66px]">
     <div class="container mx-auto px-4 lg:py-8">
       <h1 class="text-xl md:text-3xl font-bold text-gray-800 mb-4">
         DailyChill - Blog chữa lành, chia sẻ cảm hứng sống tích cực mỗi ngày
@@ -48,7 +48,7 @@
                   <img :src="getUrlImage(item)" alt="Outdoor cooking hacks" class="w-full h-auto rounded-lg" />
                   <div class="p-4">
                     <h2 class="text-xl font-bold mb-2">{{ item?.title }}</h2>
-                    <p class="text-gray-600 mb-2" v-html="item?.content"></p>
+                    <p class="text-gray-600 mb-2 clamp-5-lines" v-html="item?.content"></p>
                     <div class="text-sm text-gray-500 flex justify-between items-center">
                       <span>By {{ item?.full_name ?? "Admin" }}</span> •
                       <span>{{ new Date(item.created_at).toLocaleString() }}</span> •

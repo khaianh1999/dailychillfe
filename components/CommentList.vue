@@ -1,8 +1,8 @@
 <template>
     <div class="mt-8 space-y-6">
-      <h2 class="text-lg font-semibold text-gray-800">Comments ({{ comments.length }})</h2>
+      <h2 class="text-lg font-semibold text-gray-800">Bình luận ({{ comments.length }})</h2>
   
-      <div v-if="comments.length == 0" class="text-gray-500">No comments yet.</div>
+      <div v-if="comments.length == 0" class="text-gray-500">Hãy bình luận về bài viết nhé!</div>
   
       <div
         v-for="comment in comments"

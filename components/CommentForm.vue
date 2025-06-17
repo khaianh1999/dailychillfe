@@ -6,14 +6,14 @@
       <input
         v-model="full_name"
         type="text"
-        placeholder="Your name"
+        placeholder="Tên của bạn"
         class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-main"
         required
       />
   
       <textarea
         v-model="content"
-        placeholder="Your comment"
+        placeholder="Nội dung"
         rows="4"
         class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-main"
         required
@@ -23,7 +23,7 @@
         type="submit"
         class="bg-main hover:bg-hover text-white px-4 py-2 rounded transition"
       >
-        Post Comment
+        Gửi bình luận
       </button>
     </form>
     <!-- Toast/Notification System -->
