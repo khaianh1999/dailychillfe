@@ -61,17 +61,32 @@ export default {
     layout: 'Main',
     mixins: [main],
     head() {
+      const title = this.dataRender?.title || 'Chi tiết bài viết - DailyChill';
+      const description = this.dataRender?.description || this.stripHTML(this.dataRender?.content || '').slice(0, 160);
+      const image = this.getUrlImage(this.dataRender?.image_url || '/imgSeo.jpg');
+      const url = `https://dailychill.vn/detail/${this.$route.params.id}`;
+
       return {
-        title: 'Outdoor cooking hacks - Blog Detail',
+        title,
         meta: [
-          {
-            hid: 'description',
-            name: 'description',
-            content:
-              'Read about outdoor cooking hacks that will change the way you prepare meals in nature.',
-          },
-        ],
-      };
+          { hid: 'description', name: 'description', content: description },
+          { hid: 'keywords', name: 'keywords', content: 'blog chữa lành, phát triển bản thân, cảm hứng sống, thiền định, DailyChill' },
+          { hid: 'author', name: 'author', content: this.dataRender?.full_name || 'DailyChill Team' },
+
+          // Open Graph (Facebook, Zalo)
+          { hid: 'og:title', property: 'og:title', content: title },
+          { hid: 'og:description', property: 'og:description', content: description },
+          { hid: 'og:image', property: 'og:image', content: image },
+          { hid: 'og:url', property: 'og:url', content: url },
+          { hid: 'og:type', property: 'og:type', content: 'article' },
+
+          // Twitter Card
+          { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
+          { hid: 'twitter:title', name: 'twitter:title', content: title },
+          { hid: 'twitter:description', name: 'twitter:description', content: description },
+          { hid: 'twitter:image', name: 'twitter:image', content: image }
+        ]
+      }
     },
     components: {
         CommentForm,
@@ -93,6 +108,10 @@ export default {
         }
     },
     methods: {
+        stripHTML(html) {
+          if (!html) return '';
+          return html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+        },
         addComment(comment) {
           console.log('comment', comment);
             this.comments.unshift(comment) // thêm vào đầu danh sách

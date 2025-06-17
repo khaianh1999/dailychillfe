@@ -28,13 +28,13 @@ export default {
       { hid: 'og:description', property: 'og:description', content: 'Khám phá bài viết giúp chữa lành tâm hồn, cải thiện sức khỏe tinh thần và truyền cảm hứng tích cực mỗi ngày.' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://dailychill.vn/' }, // thay bằng domain thật
-      { hid: 'og:image', property: 'og:image', content: 'https://dailychill.vn/og-image.jpg' }, // thay bằng ảnh đại diện
+      { hid: 'og:image', property: 'og:image', content: 'https://dailychill.vn/imgSeo.jpg' }, // thay bằng ảnh đại diện
   
       // Twitter Card
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
       { hid: 'twitter:title', name: 'twitter:title', content: 'DailyChill - Blog chữa lành' },
       { hid: 'twitter:description', name: 'twitter:description', content: 'Blog chia sẻ bài viết chữa lành và cảm hứng sống tích cực mỗi ngày.' },
-      { hid: 'twitter:image', name: 'twitter:image', content: 'https://dailychill.vn/og-image.jpg' }
+      { hid: 'twitter:image', name: 'twitter:image', content: 'https://dailychill.vn/imgSeo.jpg' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },

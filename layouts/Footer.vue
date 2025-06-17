@@ -41,7 +41,7 @@
           <ul class="space-y-2">
             <li>Email: <a href="mailto:dailychillblog@gmail.com"
                 class="text-indigo-600 hover:underline">dailychillblog@gmail.com</a></li>
-            <li>Facebook: <a href="#" class="hover:text-indigo-600">/DailyChill</a></li>
+            <li>Facebook: <a href="https://www.facebook.com/dailychillblog/" class="hover:text-indigo-600">https://www.facebook.com/dailychillblog/</a></li>
             <li>Instagram: <a href="#" class="hover:text-indigo-600">@DailyChill</a></li>
           </ul>
         </div>
