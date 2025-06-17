@@ -210,7 +210,10 @@ export default {
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.message);
-                alert("Mua hàng thành công!");
+                // ✅ Cập nhật thông tin user mới
+                this.$store.commit("user/setUser", data); // hoặc data.updatedUser nếu bạn trả về object dạng { updatedUser }
+                this.setCookie("user_infor", JSON.stringify(data), 30);
+                alert("Đổi quà thành công! Vui lòng chờ duyệt!");
                 this.showPopup = false;
             } catch (err) {
                 alert(err.message);
