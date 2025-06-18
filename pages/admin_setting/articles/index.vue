@@ -94,7 +94,7 @@
                   <img :src="getUrlImage(post.image_url)" :alt="post.title" class="w-20 h-16 object-cover rounded">
                 </td>
                 <td class="px-4 py-3 max-w-xs truncate">{{ post.title }}</td>
-                <td class="px-4 py-3 max-w-sm truncate">{{ post.content }}</td>
+                <td class="px-4 py-3 max-w-sm truncate" v-html="post.content"</td>
                 <td class="px-4 py-3">{{ post.category_ids }}</td>
                 <td class="px-4 py-3">{{ formatDate(post.created_at) }}</td>
                 <td class="px-4 py-3">{{ formatDate(post.updated_at) }}</td>
@@ -223,6 +223,10 @@
               class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
               Thêm bài đăng
             </button>
+            <button @click="closeAddModal" type="button"
+              class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              Đóng
+            </button>
           </form>
         </div>
       </div>
@@ -308,6 +312,10 @@
             <button type="submit"
               class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
               Cập nhật bài đăng
+            </button>
+            <button @click="closeEditModal" type="button"
+              class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              Đóng
             </button>
           </form>
         </div>
