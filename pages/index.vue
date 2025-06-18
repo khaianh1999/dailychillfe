@@ -34,25 +34,27 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12">
-        <div class="col-span-1 lg:col-span-9">
-          <!-- Wrapper masonry -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 lg:gap-x-4">
+        <!-- MenuRight (trên đầu khi mobile, bên phải khi desktop) -->
+        <div class="order-1 lg:order-2 lg:col-span-3">
+          <MenuRight />
+        </div>
+
+        <!-- Bài viết -->
+        <div class="order-2 lg:order-1 lg:col-span-9">
           <div class="columns-1 md:columns-2 gap-4">
-
-
-            <!-- Bài viết -->
             <div v-for="(item, index) in dataRender" :key="index"
               class="break-inside-avoid bg-white rounded-xl shadow-md border border-gray-200 p-4 mb-4">
               <div class="blog-card">
-                <nuxt-link :to="/detail/ + item.id" class="block">
+                <nuxt-link :to="`/detail/${item.id}`" class="block">
                   <img :src="getUrlImage(item)" alt="Outdoor cooking hacks" class="w-full h-auto rounded-lg" />
                   <div class="p-4">
                     <h2 class="text-xl font-bold mb-2">{{ item?.title }}</h2>
                     <div class="text-gray-600 mb-2 clamp-5-lines" v-html="item?.content"></div>
                     <div class="text-sm text-gray-500 flex justify-between items-center">
-                      <span>By {{ item?.full_name ?? "Admin" }}</span> •
+                      <span>By {{ item?.full_name ?? 'Admin' }}</span> •
                       <span>{{ new Date(item.created_at).toLocaleString() }}</span> •
-                      <span>{{ fakeView() }}👍</span>
+                      <span>{{ fakeView() }} 👍</span>
                     </div>
                   </div>
                 </nuxt-link>
@@ -60,11 +62,6 @@
             </div>
           </div>
         </div>
-        <!-- Danh mục nằm trong cột phải (col-span-4) -->
-        <div class="col-span-1 lg:col-span-3 ml-0 lg:ml-4">
-          <MenuRight />
-        </div>
-
       </div>
       <div class="flex justify-center mt-6">
         <nav class="inline-flex -space-x-px text-sm">

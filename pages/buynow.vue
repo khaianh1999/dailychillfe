@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-4 py-8 mt-8 lg:mt-16">
+    <div class="container mx-auto px-4 py-8 mt-8 md:mt-16">
         <h1 class="text-2xl font-bold mb-2 lg:mb-6 text-center">Danh sách sản phẩm</h1>
         <p class="font-semibold text-gray-500 text-xl text-center mb-6">Hãy tích cực chia sẻ mã giới thiệu để nhận được 🎁 nhé !!</p>
         <div class="text-right mb-6" v-if="IsLogin">

@@ -2,7 +2,7 @@
     <div>
         <section class="max-w-3xl mx-auto px-4 py-12 mt-10 lg:mt-16">
             <div
-                class="bg-white rounded-2xl shadow-md p-8 mb-40 flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-10">
+                class="bg-white rounded-2xl shadow-md p-8 flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-10">
 
                 <!-- Avatar -->
                 <div class="flex-shrink-0">
@@ -45,16 +45,20 @@
                 </div>
             </div>
         </div>
+        <Youtube/>
     </div>
 </template>
 <script>
 const DOMAIN = process.env.DOMAIN_API ?? "https://api.dailychill.vn/";
-
+import Youtube from "../components/Youtube.vue";
 import main from "~/mixins/main";
 export default {
     name: "ProfilePage",
     layout: "Main",
     mixins: [main],
+    components: {
+        Youtube,
+    },
     data() {
         return {
             user: {

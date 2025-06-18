@@ -1,6 +1,6 @@
 <template>
     <div class="mt-[56px]">
-        <div class="container mx-auto px-4 lg:py-8">
+        <div class="container mx-auto px-4 md:py-8">
             <div class="py-4 w-full max-w-6xl mx-auto">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
                     <!-- Nút Tạo bài viết -->
@@ -29,17 +29,20 @@
                     </form>
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-12">
-                <div class="col-span-1 lg:col-span-9">
-                    <!-- Wrapper masonry -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-y-4 lg:gap-x-4">
+
+                <!-- MenuRight (nằm trên cùng khi mobile) -->
+                <div class="lg:col-span-3 order-1 lg:order-2">
+                    <MenuRight />
+                </div>
+
+                <!-- Bài viết -->
+                <div class="lg:col-span-9 order-2 lg:order-1">
                     <div class="columns-1 md:columns-2 gap-4">
-
-
-                        <!-- Bài viết -->
                         <div v-for="(item, index) in dataRender" :key="index"
                             class="break-inside-avoid bg-white rounded-xl shadow-md border border-gray-200 p-4 mb-4">
                             <div class="blog-card">
-                                <nuxt-link :to="/detail/ + item.id" class="block">
+                                <nuxt-link :to="`/detail/${item.id}`" class="block">
                                     <img :src="getUrlImage(item)" alt="Outdoor cooking hacks"
                                         class="w-full h-auto rounded-lg" />
                                     <div class="p-4">
@@ -56,12 +59,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Danh mục nằm trong cột phải (col-span-4) -->
-                <div class="col-span-1 lg:col-span-3 ml-0 lg:ml-4">
-                    <MenuRight />
-                </div>
-
             </div>
+
         </div>
 
         <div class="flex justify-center mt-6">
@@ -123,8 +122,8 @@ export default {
     methods: {
         changePage(page) {
             if (page >= 1 && page <= this.meta.totalPages) {
-            this.meta.currentPage = page;
-            this.fetchArticles(page);
+                this.meta.currentPage = page;
+                this.fetchArticles(page);
             }
         },
         async fetchArticles(page = 1) {
