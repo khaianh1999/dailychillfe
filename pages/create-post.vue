@@ -33,6 +33,7 @@
                         <label for="content" class="block mb-2 text-sm font-medium text-gray-700">Nội dung</label>
                         <client-only>
                         <ckeditor
+                            v-if="editor"
                             :editor="editor"
                             v-model="newPost.content"
                             :config="editorConfig"
@@ -70,15 +71,15 @@
 const DOMAIN = process.env.DOMAIN_API ?? "https://api.dailychill.vn/";
 import main from "~/mixins/main";
 import Youtube from "../components/Youtube.vue";
-import CKEditor from '@ckeditor/ckeditor5-vue2';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import CKEditor from '@ckeditor/ckeditor5-vue2';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export default {
     name: "CreatePostPage",
     layout: "Main",
     mixins: [main],
     components: {
         Youtube,
-        ckeditor: CKEditor.component,
+        // ckeditor: CKEditor.component,
     },
     data() {
         return {
@@ -96,7 +97,7 @@ export default {
             selectedAddFile: null,
             categories: [], // Assume fetched from API
             isSubmitting: false,
-            editor: ClassicEditor,
+            editor: null,
             editorConfig: {
                 toolbar: [
                     'heading', '|',
@@ -108,6 +109,12 @@ export default {
     },
     async mounted() {
         await this.fetchCategories();
+
+        // 👇 Lazy load ClassicEditor khi mounted (client-side only)
+        if (process.client) {
+            const ClassicEditor = (await import('@ckeditor/ckeditor5-build-classic')).default
+            this.editor = ClassicEditor
+        }
     },
     methods: {
         showToast(message, type) {

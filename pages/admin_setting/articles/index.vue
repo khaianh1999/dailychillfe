@@ -206,6 +206,7 @@
                   dung</label>
                 <client-only>
                 <ckeditor
+                    v-if="editor"
                     :editor="editor"
                     v-model="newPost.content"
                     :config="editorConfig"
@@ -291,6 +292,7 @@
                   dung</label>
                 <client-only>
                   <ckeditor
+                      v-if="editor"
                       :editor="editor"
                       v-model="editPost.content"
                       :config="editorConfig"
@@ -350,19 +352,19 @@
 <script>
 const DOMAIN = process.env.DOMAIN_API ?? "https://api.dailychill.vn/";
 import main from "~/mixins/main";
-import CKEditor from '@ckeditor/ckeditor5-vue2';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import CKEditor from '@ckeditor/ckeditor5-vue2';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   name: 'ArticlesPage',
   layout: "Admin",
   mixins: [main],
   components: {
-    ckeditor: CKEditor.component
+    // ckeditor: CKEditor.component
   },
   data() {
     return {
-      editor: ClassicEditor,
+      editor: null,
       editorConfig: {
         toolbar: [
           'heading', '|',
@@ -423,8 +425,12 @@ export default {
   watch: {
 
   },
-  mounted() {
-    
+  async mounted() {
+    // 👇 Lazy load ClassicEditor khi mounted (client-side only)
+    if (process.client) {
+      const ClassicEditor = (await import('@ckeditor/ckeditor5-build-classic')).default
+      this.editor = ClassicEditor
+    }
   },
   async fetch() {
     // Tải tất cả bài viết khi component được tạo
