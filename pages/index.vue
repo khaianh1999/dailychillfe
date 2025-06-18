@@ -129,15 +129,6 @@ export default {
     this.fetchArticles(this.meta.currentPage);
   },
   methods: {
-    // async fetchArticles() {
-    //   try {
-    //     const response = await this.$axios.$get(`/articles?searchQuery=${this.searchQuery}&limit=50`);
-    //     this.dataRender = response.data ?? [];
-    //   } catch (error) {
-    //     console.error('Lỗi khi lấy danh sách bài viết:', error);
-    //     // this.showToast('Lỗi khi tải bài viết!', 'error');
-    //   }
-    // },
     async fetchArticles(page = 1) {
       try {
         const response = await this.$axios.$get(`/articles?searchQuery=${this.searchQuery}&limit=50&page=${page}`);

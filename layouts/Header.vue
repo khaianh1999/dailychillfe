@@ -32,6 +32,7 @@
 
                     <div v-if="dropdownOpen" ref="dropdownInfor" class="overflow-hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
                         <nuxt-link @click.native="dropdownOpen = false" to="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Hồ sơ</nuxt-link>
+                        <nuxt-link @click.native="dropdownOpen = false" to="/my-articles" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Danh sách bài viết</nuxt-link>
                         <nuxt-link @click.native="dropdownOpen = false" to="/buynow" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Đổi quà</nuxt-link>
                         <div @click="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">Đăng xuất</div>
                     </div>
