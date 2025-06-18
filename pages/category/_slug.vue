@@ -73,8 +73,8 @@
                 </button>
 
                 <button v-for="page in meta.totalPages" :key="page"
-                    class="px-3 py-2 leading-tight border border-gray-300 hover:bg-pink-100" :class="{
-                        'bg-pink-500 text-white': meta.currentPage === page,
+                    class="px-3 py-2 leading-tight border border-gray-300 hover:bg-main" :class="{
+                        'bg-main text-white': meta.currentPage === page,
                         'text-gray-500 bg-white': meta.currentPage !== page
                     }" @click="changePage(page)">
                     {{ page }}
