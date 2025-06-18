@@ -64,7 +64,55 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/pwa',
   ],
+  pwa: {
+    manifest: {
+      name: 'DailyChill',
+      short_name: 'App',
+      lang: 'vi',
+      display: 'standalone',
+      start_url: '/',
+      background_color: '#ffffff',
+      theme_color: '#8b4513',
+      icons: [
+        {
+          src: '/icon.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: '/icon@512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ]
+    },
+    meta: {
+      mobileApp: true,
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'default',
+      name: 'DailyChill',
+      author: 'DailyChill'
+    },
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/api\.dailychill\.vn\/articles/,
+          handler: 'NetworkFirst',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'articles-cache',
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 20 // ❗ 20 phút = 60 giây * 20
+            }
+          }
+        }
+      ]
+    }
+  },
+  
 
   axios: {
     // Base URL cho API Node.js của bạn
