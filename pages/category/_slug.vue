@@ -44,7 +44,7 @@
                                         class="w-full h-auto rounded-lg" />
                                     <div class="p-4">
                                         <h2 class="text-xl font-bold mb-2">{{ item?.title }}</h2>
-                                        <p class="text-gray-600 mb-2" v-html="item?.content"></p>
+                                        <div class="text-gray-600 mb-2 clamp-5-lines" v-html="item?.content"></div>
                                         <div class="text-sm text-gray-500 flex justify-between items-center">
                                             <span>By Admin</span> •
                                             <span>{{ new Date(item.created_at).toLocaleString() }}</span> •
