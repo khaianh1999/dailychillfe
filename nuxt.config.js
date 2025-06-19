@@ -70,12 +70,12 @@ export default {
   robots: {
     rules: [
       {
-        UserAgent: '*',
-        Disallow: ''
-      },
-      {
         UserAgent: 'facebookexternalhit',
         Allow: '/'
+      },
+      {
+        UserAgent: '*',
+        Disallow: ''
       }
     ],
     Sitemap: 'https://dailychill.vn/sitemap.xml'
