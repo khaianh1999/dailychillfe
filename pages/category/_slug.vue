@@ -51,7 +51,7 @@
                                         <div class="text-sm text-gray-500 flex justify-between items-center">
                                             <span>By Admin</span> •
                                             <span>{{ new Date(item.created_at).toLocaleString() }}</span> •
-                                            <span>2 min read</span>
+                                            <span>{{ fakeView() }} 👍</span>
                                         </div>
                                     </div>
                                 </nuxt-link>
@@ -92,10 +92,11 @@
 <script>
 const DOMAIN = process.env.DOMAIN_API ?? "https://api.dailychill.vn/";
 import MenuRight from "../../components/MenuRight.vue";
-
+import main from "~/mixins/main";
 export default {
     name: 'CategoryPage',
     layout: "Main",
+    mixins: [main],
     components: {
         MenuRight,
     },
