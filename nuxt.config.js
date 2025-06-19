@@ -28,7 +28,9 @@ export default {
       { hid: 'og:description', property: 'og:description', content: 'Khám phá bài viết giúp chữa lành tâm hồn, cải thiện sức khỏe tinh thần và truyền cảm hứng tích cực mỗi ngày.' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://dailychill.vn/' }, // thay bằng domain thật
-      { hid: 'og:image', property: 'og:image', content: 'https://dailychill.vn/imgSeo.jpg' }, // thay bằng ảnh đại diện
+      // { hid: 'og:image', property: 'og:image', content: 'https://dailychill.vn/imgSeo.jpg' }, // thay bằng ảnh đại diện
+      { hid: 'og:image', property: 'og:image', content: 'https://dailychill.vn/imgSeofb.jpg' },
+      { hid: 'og:image:alt', property: 'og:image:alt', content: 'Ly cà phê ấm và không gian thư giãn cùng DailyChill' },
   
       // Twitter Card
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
