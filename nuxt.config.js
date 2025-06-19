@@ -37,7 +37,7 @@ export default {
       { hid: 'twitter:image', name: 'twitter:image', content: 'https://dailychill.vn/imgSeo.jpg' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' },
       { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css' },
     ],
     script: [
@@ -65,7 +65,21 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/robots',
   ],
+  robots: {
+    rules: [
+      {
+        UserAgent: '*',
+        Disallow: ''
+      },
+      {
+        UserAgent: 'facebookexternalhit',
+        Allow: '/'
+      }
+    ],
+    Sitemap: 'https://dailychill.vn/sitemap.xml'
+  },
   pwa: {
     manifest: {
       name: 'DailyChill',
