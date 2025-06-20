@@ -161,6 +161,8 @@ export default {
                         processedFile = new File([convertedBlob], file.name.replace(/\.heic$/, '.jpg'), {
                             type: 'image/jpeg',
                         });
+                        console.log('File gửi lên:', processedFile);
+                        console.log('Kích thước file (bytes):', processedFile.size);
                     } catch (err) {
                         console.error('Lỗi khi chuyển ảnh HEIC sang JPEG:', err);
                         throw new Error('Không thể xử lý ảnh HEIC. Vui lòng chọn ảnh định dạng JPG/PNG.');
