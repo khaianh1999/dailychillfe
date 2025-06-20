@@ -158,7 +158,11 @@ export default {
                             quality: 0.9,
                         });
 
-                        processedFile = new File([convertedBlob], file.name.replace(/\.heic$/, '.jpg'), {
+                       
+                        // ✅ Đặt lại tên file thành .jpg (đổi đuôi)
+                        const newFileName = file.name.replace(/\.heic$/i, '.jpg');
+
+                        processedFile = new File([convertedBlob], newFileName, {
                             type: 'image/jpeg',
                         });
                         console.log('File gửi lên:', processedFile);
