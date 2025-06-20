@@ -176,36 +176,36 @@ export default {
             if (this.isSubmitting) return; // Tránh nhấn nhiều lần
             this.isSubmitting = true;
 
-            // // ✅ Kiểm tra số bài viết hôm nay
-            // if (this.getPostCountToday() >= 5) {
-            //     this.showToast('Bạn đã đăng tối đa 5 bài viết hôm nay. Hãy quay lại vào ngày mai nhé!', 'error');
-            //     this.isSubmitting = false;
-            //     return;
-            // }
+            // ✅ Kiểm tra số bài viết hôm nay
+            if (this.getPostCountToday() >= 5) {
+                this.showToast('Bạn đã đăng tối đa 5 bài viết hôm nay. Hãy quay lại vào ngày mai nhé!', 'error');
+                this.isSubmitting = false;
+                return;
+            }
 
-            // // Kiểm tra dữ liệu trước khi gửi
-            // if (!this.newPost.title.trim()) {
-            //     this.showToast('Vui lòng nhập tiêu đề.', 'error');
-            //     this.isSubmitting = false;
-            //     return;
-            // }
+            // Kiểm tra dữ liệu trước khi gửi
+            if (!this.newPost.title.trim()) {
+                this.showToast('Vui lòng nhập tiêu đề.', 'error');
+                this.isSubmitting = false;
+                return;
+            }
 
-            // if (!this.newPost.content.trim()) {
-            //     this.showToast('Vui lòng nhập nội dung.', 'error');
-            //     this.isSubmitting = false;
-            //     return;
-            // }
+            if (!this.newPost.content.trim()) {
+                this.showToast('Vui lòng nhập nội dung.', 'error');
+                this.isSubmitting = false;
+                return;
+            }
 
-            // if (!this.newPost.selectedCategoryIds || this.newPost.selectedCategoryIds.length === 0) {
-            //     this.showToast('Vui lòng chọn ít nhất 1 thể loại.', 'error');
-            //     return;
-            // }
+            if (!this.newPost.selectedCategoryIds || this.newPost.selectedCategoryIds.length === 0) {
+                this.showToast('Vui lòng chọn ít nhất 1 thể loại.', 'error');
+                return;
+            }
 
-            // if (!this.selectedAddFile) {
-            //     this.showToast('Vui lòng chọn hình ảnh.', 'error');
-            //     this.isSubmitting = false;
-            //     return;
-            // }
+            if (!this.selectedAddFile) {
+                this.showToast('Vui lòng chọn hình ảnh.', 'error');
+                this.isSubmitting = false;
+                return;
+            }
 
             try {
                 const formData = await this.createFormData(this.newPost, this.selectedAddFile);
