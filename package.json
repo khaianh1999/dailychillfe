@@ -23,6 +23,7 @@
     "core-js": "^3.25.3",
     "dotenv": "^16.5.0",
     "flowbite": "^2.5.2",
+    "heic2any": "^0.0.4",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
     "vue-owl-carousel": "^2.0.3",

@@ -32,12 +32,7 @@
                     <div>
                         <label for="content" class="block mb-2 text-sm font-medium text-gray-700">Nội dung</label>
                         <client-only>
-                        <ckeditor
-                            v-if="editor"
-                            :editor="editor"
-                            v-model="newPost.content"
-                            :config="editorConfig"
-                        />
+                            <ckeditor v-if="editor" :editor="editor" v-model="newPost.content" :config="editorConfig" />
                         </client-only>
                         <!-- <textarea v-model="newPost.content" id="content" rows="6" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"></textarea> -->
@@ -46,9 +41,7 @@
                     <input type="hidden" v-model="newPost.updated_by" />
 
                     <div class="text-center">
-                        <button type="submit"
-                        :disabled="isSubmitting"
-                        :class="[
+                        <button type="submit" :disabled="isSubmitting" :class="[
                             'bg-main hover:bg-hover text-white font-semibold px-6 py-3 rounded-lg shadow-md transition duration-200',
                             isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                         ]">
@@ -60,10 +53,10 @@
             <!-- Toast/Notification System -->
             <div v-if="toast.show" class="fixed bottom-4 right-4 p-4 rounded-lg shadow-lg text-white"
                 :class="toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'">
-            {{ toast.message }}
+                {{ toast.message }}
             </div>
         </section>
-        <Youtube/>
+        <Youtube />
     </div>
 </template>
 
@@ -105,6 +98,7 @@ export default {
                     'blockQuote', 'insertTable', 'undo', 'redo'
                 ]
             },
+            heic2any: null
         };
     },
     async mounted() {
@@ -114,16 +108,20 @@ export default {
         if (process.client) {
             const ClassicEditor = (await import('@ckeditor/ckeditor5-build-classic')).default
             this.editor = ClassicEditor
+
+            // Import heic2any chỉ khi mounted
+            const module = await import('heic2any');
+            this.heic2any = module.default;
         }
     },
     methods: {
         showToast(message, type) {
-          this.toast.message = message;
-          this.toast.type = type;
-          this.toast.show = true;
-          setTimeout(() => {
-            this.toast.show = false;
-          }, 5000); // Tự động ẩn sau 5 giây
+            this.toast.message = message;
+            this.toast.type = type;
+            this.toast.show = true;
+            setTimeout(() => {
+                this.toast.show = false;
+            }, 5000); // Tự động ẩn sau 5 giây
         },
         async fetchCategories() {
             try {
@@ -139,55 +137,78 @@ export default {
                 this.selectedAddFile = file;
             }
         },
-        createFormData(data, file) {
+        async createFormData(data, file) {
             const formData = new FormData();
             formData.append('title', data.title);
             formData.append('content', data.content);
             formData.append('updated_by', data.updated_by);
-            // formData.append('category_ids', JSON.stringify(data.selectedCategoryIds));
-            // Chuyển mảng ID sang chuỗi, ví dụ: [1, 3, 4] → "1,3,4"
+
             const categoryIdsString = (data.selectedCategoryIds || []).join(',');
             formData.append('category_ids', categoryIdsString);
-            if (file) formData.append('image', file);
+
+            if (file) {
+                let processedFile = file;
+
+                // Nếu là ảnh HEIC thì convert sang JPEG
+                if (file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heic')) {
+                    try {
+                        const convertedBlob = await this.heic2any({
+                            blob: file,
+                            toType: 'image/jpeg',
+                            quality: 0.9,
+                        });
+
+                        processedFile = new File([convertedBlob], file.name.replace(/\.heic$/, '.jpg'), {
+                            type: 'image/jpeg',
+                        });
+                    } catch (err) {
+                        console.error('Lỗi khi chuyển ảnh HEIC sang JPEG:', err);
+                        throw new Error('Không thể xử lý ảnh HEIC. Vui lòng chọn ảnh định dạng JPG/PNG.');
+                    }
+                }
+
+                formData.append('image', processedFile);
+            }
+
             return formData;
         },
         async addNewPost() {
             if (this.isSubmitting) return; // Tránh nhấn nhiều lần
             this.isSubmitting = true;
 
-            // ✅ Kiểm tra số bài viết hôm nay
-            if (this.getPostCountToday() >= 5) {
-                this.showToast('Bạn đã đăng tối đa 5 bài viết hôm nay. Hãy quay lại vào ngày mai nhé!', 'error');
-                this.isSubmitting = false;
-                return;
-            }
+            // // ✅ Kiểm tra số bài viết hôm nay
+            // if (this.getPostCountToday() >= 5) {
+            //     this.showToast('Bạn đã đăng tối đa 5 bài viết hôm nay. Hãy quay lại vào ngày mai nhé!', 'error');
+            //     this.isSubmitting = false;
+            //     return;
+            // }
 
-            // Kiểm tra dữ liệu trước khi gửi
-            if (!this.newPost.title.trim()) {
-                this.showToast('Vui lòng nhập tiêu đề.', 'error');
-                this.isSubmitting = false;
-                return;
-            }
+            // // Kiểm tra dữ liệu trước khi gửi
+            // if (!this.newPost.title.trim()) {
+            //     this.showToast('Vui lòng nhập tiêu đề.', 'error');
+            //     this.isSubmitting = false;
+            //     return;
+            // }
 
-            if (!this.newPost.content.trim()) {
-                this.showToast('Vui lòng nhập nội dung.', 'error');
-                this.isSubmitting = false;
-                return;
-            }
+            // if (!this.newPost.content.trim()) {
+            //     this.showToast('Vui lòng nhập nội dung.', 'error');
+            //     this.isSubmitting = false;
+            //     return;
+            // }
 
-            if (!this.newPost.selectedCategoryIds || this.newPost.selectedCategoryIds.length === 0) {
-                this.showToast('Vui lòng chọn ít nhất 1 thể loại.', 'error');
-                return;
-            }
+            // if (!this.newPost.selectedCategoryIds || this.newPost.selectedCategoryIds.length === 0) {
+            //     this.showToast('Vui lòng chọn ít nhất 1 thể loại.', 'error');
+            //     return;
+            // }
 
-            if (!this.selectedAddFile) {
-                this.showToast('Vui lòng chọn hình ảnh.', 'error');
-                this.isSubmitting = false;
-                return;
-            }
+            // if (!this.selectedAddFile) {
+            //     this.showToast('Vui lòng chọn hình ảnh.', 'error');
+            //     this.isSubmitting = false;
+            //     return;
+            // }
 
             try {
-                const formData = this.createFormData(this.newPost, this.selectedAddFile);
+                const formData = await this.createFormData(this.newPost, this.selectedAddFile);
                 const token = this.getCookie("token_user");
 
                 if (!token) {
