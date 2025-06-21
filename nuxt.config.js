@@ -44,7 +44,26 @@ export default {
     ],
     script: [
       { src: "https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js" },
-    ]
+      {
+        src: 'https://www.googletagmanager.com/gtag/js?id=AW-17241850637',
+        async: true
+      },
+      {
+        hid: 'gtag-init',
+        innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-17241850637');
+        `,
+        type: 'text/javascript',
+        charset: 'utf-8'
+      },
+    ],
+    __dangerouslyDisableSanitizersByTagID: {
+      'gtag-init': ['innerHTML']
+    }
+
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -55,6 +74,7 @@ export default {
     '~/plugins/fontawesome.js',
     { src: "~/plugins/carousel.js", ssr: false },
     { src: "~/plugins/ckeditor.js", ssr: false },
+    { src: '~/plugins/gtag.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
