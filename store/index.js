@@ -7,7 +7,8 @@ export const actions = {
   
       const hasUserInfor = parsed.user_infor;
       const hasToken = parsed.token_user;
-  
+      console.log("hasUserInfor", hasUserInfor);
+      console.log("hasToken", hasToken);
       if (hasUserInfor && hasToken) {
         try {
           const user = JSON.parse(decodeURIComponent(hasUserInfor));
@@ -15,7 +16,12 @@ export const actions = {
         } catch (e) {
           console.error('Lỗi parse cookie user_infor:', e);
         }
+      } else {
+        console.log("Không có thông tin người dùng trong cookie");
+        // clear user state if no cookie
+        commit('user/setUser', null);
       }
+     
     }
   }
 };
