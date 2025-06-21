@@ -134,8 +134,10 @@ export default {
             // ✅ Optionally reset user trong Vuex nếu có
             this.$store.commit("user/setUser", null);
 
-            // reload
-            window.location.href="/";
+            // ✅ Delay nhẹ để cookie được ghi rồi mới reload
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 100); // 100ms là đủ an toàn
         },
         toggleMenu() {
             this.isOpen = !this.isOpen;
