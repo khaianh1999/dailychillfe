@@ -25,7 +25,7 @@
             <!-- Login + Mobile toggle -->
             <div class="flex items-center space-x-2">
                 <div class="relative">
-                    <div v-if="$store.getters['user/isAuthenticated']" class="relative">
+                    <div v-if="isLogin" class="relative">
                     <div @click="toggleDropdown" ref="toggleInfor" class="cursor-pointer px-3 py-1 rounded-md text-sm text-white hover:text-yellow-300 transition">
                         {{ $store.getters['user/user'].full_name }}
                     </div>
@@ -91,10 +91,16 @@ export default {
         return {
             isOpen: false,
             dropdownOpen: false,
+            isLogin: false,
         }
     },
     mounted() {
         document.addEventListener('click', this.handleClickOutside);
+        if (!!this.getCookie("token_user") && !!this.getCookie("user_infor")) {
+            this.isLogin = true;
+        } else {
+            this.isLogin = false;
+        }
     },
     beforeDestroy() {
         document.removeEventListener('click', this.handleClickOutside);
@@ -136,7 +142,7 @@ export default {
 
             // ✅ Delay nhẹ để cookie được ghi rồi mới reload
             setTimeout(() => {
-                window.location.href = "/";
+                window.location.reload(); 
             }, 200); // 100ms là đủ an toàn
         },
         toggleMenu() {
