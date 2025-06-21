@@ -22,7 +22,7 @@
                         <i>*Nếu bài viết được duyệt hoặc đã có người dùng mã giới thiệu => hãy đăng nhập lại để cập nhật số coin!</i>  
                         </p>
 
-                    <div class="mt-6" v-if="!user.refer_code">
+                    <div class="mt-6" v-if="!user.refer_code && user?.full_name">
                         <button @click="showPopup = true"
                             class="bg-main hover:bg-textmain text-white font-medium py-2 px-4 rounded-xl shadow transition">
                             Nhập mã giới thiệu

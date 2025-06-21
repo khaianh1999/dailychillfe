@@ -27,7 +27,7 @@
                 <div class="relative">
                     <div v-if="isLogin" class="relative">
                     <div @click="toggleDropdown" ref="toggleInfor" class="cursor-pointer px-3 py-1 rounded-md text-sm text-white hover:text-yellow-300 transition">
-                        {{ $store.getters['user/user'].full_name }}
+                        {{ $store.getters['user/user']?.full_name }}
                     </div>
 
                     <div v-if="dropdownOpen" ref="dropdownInfor" class="overflow-hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
