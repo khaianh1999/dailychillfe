@@ -137,7 +137,7 @@ export default {
             // ✅ Delay nhẹ để cookie được ghi rồi mới reload
             setTimeout(() => {
                 window.location.href = "/";
-            }, 100); // 100ms là đủ an toàn
+            }, 200); // 100ms là đủ an toàn
         },
         toggleMenu() {
             this.isOpen = !this.isOpen;
