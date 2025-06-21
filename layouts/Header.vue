@@ -25,7 +25,7 @@
             <!-- Login + Mobile toggle -->
             <div class="flex items-center space-x-2">
                 <div class="relative">
-                    <div v-if="isLogin" class="relative">
+                    <div v-if="$store.getters['user/user']?.full_name" class="relative">
                     <div @click="toggleDropdown" ref="toggleInfor" class="cursor-pointer px-3 py-1 rounded-md text-sm text-white hover:text-yellow-300 transition">
                         {{ $store.getters['user/user']?.full_name }}
                     </div>
@@ -91,21 +91,32 @@ export default {
         return {
             isOpen: false,
             dropdownOpen: false,
-            isLogin: false,
         }
     },
     mounted() {
         document.addEventListener('click', this.handleClickOutside);
-        if (!!this.getCookie("token_user") && !!this.getCookie("user_infor")) {
-            this.isLogin = true;
-        } else {
-            this.isLogin = false;
-        }
+        this.syncUserFromCookie();
     },
     beforeDestroy() {
         document.removeEventListener('click', this.handleClickOutside);
     },
     methods: {
+        syncUserFromCookie() {
+            const token = this.getCookie("token_user");
+            const user = this.getCookie("user_infor");
+
+            if (token && user) {
+                try {
+                    const parsed = JSON.parse(decodeURIComponent(user));
+                    this.$store.commit("user/setUser", parsed);
+                } catch (e) {
+                    console.error("Lỗi parse cookie user_infor:", e);
+                    this.$store.commit("user/setUser", null);
+                }
+            } else {
+                this.$store.commit("user/setUser", null);
+            }
+        },
         toggleDropdown() {
             this.dropdownOpen = !this.dropdownOpen;
         },
@@ -143,7 +154,7 @@ export default {
             // ✅ Delay nhẹ để cookie được ghi rồi mới reload
             setTimeout(() => {
                 window.location.reload(); 
-            }, 200); // 100ms là đủ an toàn
+            }, 100); // 100ms là đủ an toàn
         },
         toggleMenu() {
             this.isOpen = !this.isOpen;

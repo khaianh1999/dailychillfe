@@ -102,14 +102,13 @@ export default {
             });
             const data = await res.json();
             this.user = data;
-            this.setCookie("user_infor", data, 30);
+            if (this.getCookie("token_user")) { // có token user mới set user_infor
+                this.setCookie("user_infor", data, 30);
+            }
+            
             // Lưu vào store (giả sử có namespace 'user' và mutation 'setUser')
             this.$store.commit("user/setUser", data);
 
-            if (token) { // nếu là mới đăng nhập thì reload lại
-                console.log("chui vào đây");
-                window.location.reload();
-            }
 
         } catch (err) {
             console.error("Không thể xác thực:", err);
