@@ -87,7 +87,10 @@ export default {
     async mounted() {
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get("token");
-
+        // nếu có cookie token_user và user_infor rồi thì thôi không call api nữa 
+        if (!token && this.getCookie("token_user") && this.getCookie("user_infor")) {
+            return true;
+        }
         if (token) {
             this.setCookie("token_user", token, 30);
         }
@@ -105,6 +108,8 @@ export default {
             this.setCookie("user_infor", data, 30);
             // Lưu vào store (giả sử có namespace 'user' và mutation 'setUser')
             this.$store.commit("user/setUser", data);
+            
+            window.location.reload();
         } catch (err) {
             console.error("Không thể xác thực:", err);
         }
