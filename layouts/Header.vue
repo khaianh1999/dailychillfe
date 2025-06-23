@@ -102,6 +102,9 @@ export default {
     },
     methods: {
         syncUserFromCookie() {
+            if (this.$store.getters['user/user']?.full_name) {
+                return; // Đã có user → không cần sync
+            }
             const token = this.getCookie("token_user");
             const user = this.getCookie("user_infor");
 

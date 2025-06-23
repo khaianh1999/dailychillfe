@@ -31,6 +31,49 @@
                                 </li>
                         </ul>
                 </div>
+
+                <!-- Top 3 người viết trong tuần -->
+                <div class="mt-6 bg-white rounded-xl shadow-md border border-gray-200 p-4">
+                        <h2 class="text-lg font-bold mb-3 text-textmain">🔥 Top 3 Người Viết Tuần Này</h2>
+                        <ul class="space-y-3">
+                        <li
+                        v-for="(user, index) in topWriters"
+                        :key="user.id"
+                        class="flex items-center space-x-3"
+                        >
+                        <!-- Avatar -->
+                        <div
+                                class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden text-sm font-semibold text-main uppercase"
+                        >
+                                <img
+                                v-if="user.avatar"
+                                :src="user.avatar"
+                                alt="avatar"
+                                class="w-full h-full object-cover"
+                                />
+                                <span v-else>{{ user.name.charAt(0) }}</span>
+                        </div>
+
+                        <!-- Thông tin -->
+                        <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-800">{{ user.name }}</p>
+                                <p class="text-xs text-gray-500">{{ user.postCount }} bài viết</p>
+                        </div>
+
+                        <!-- Huy hiệu top -->
+                        <span
+                                class="text-xs px-2 py-0.5 rounded-full font-semibold"
+                                :class="[
+                                index === 0 ? 'bg-yellow-400 text-white' :
+                                index === 1 ? 'bg-gray-400 text-white' :
+                                'bg-orange-400 text-white'
+                                ]"
+                        >
+                                #{{ index + 1 }}
+                        </span>
+                        </li>
+                        </ul>
+                </div>
         </div>
 </template>
 
@@ -49,7 +92,27 @@ export default {
                                 { slug: 'nha-co-may', name: 'Nhà Có Mây' },
                                 { slug: 'cham-mot-nhip', name: 'Chậm Một Nhịp' },
                                 { slug: 'thanh-thoi', name: 'Thảnh Thơi' },
-                        ]
+                        ],
+                        topWriters: [
+                        {
+                                id: 1,
+                                name: 'Minh An',
+                                postCount: 12,
+                                avatar: null // hoặc đường dẫn ảnh: '/avatars/minh.jpg'
+                        },
+                        {
+                                id: 2,
+                                name: 'Thùy Dương',
+                                postCount: 9,
+                                avatar: null
+                        },
+                        {
+                                id: 3,
+                                name: 'Trí Nguyễn',
+                                postCount: 7,
+                                avatar: null
+                        }
+                        ],
                 }
         }
 }

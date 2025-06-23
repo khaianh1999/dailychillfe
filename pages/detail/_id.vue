@@ -15,7 +15,8 @@
   
           <!-- Meta -->
           <div class="text-sm text-gray-500 mb-6 flex flex-wrap gap-2">
-            <span>By <strong class="text-gray-700">{{dataRender?.full_name ?? 'Admin'}}</strong></span>
+            <span v-if="dataRender?.is_anonymous">By <strong class="text-gray-700">{{ dataRender?.name_anonymous ?? 'Ẩn danh' }}</strong></span>
+            <span v-else>By <strong class="text-gray-700">{{dataRender?.full_name ?? 'Admin'}}</strong></span>
             <span>•</span>
             <span>{{ new Date(dataRender?.created_at).toLocaleString() }}</span>
             <span>•</span>

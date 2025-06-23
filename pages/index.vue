@@ -4,6 +4,7 @@
       <h1 class="text-xl md:text-3xl font-bold text-gray-800 mb-4">
         DailyChill - Blog chữa lành, chia sẻ cảm hứng sống tích cực mỗi ngày
       </h1>
+      <h2>     <i>“Viết để đổi quà – Chia sẻ để chữa lành”</i></h2>
 
       <div class="py-4 w-full max-w-6xl mx-auto">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
@@ -52,7 +53,9 @@
                     <h2 class="text-xl font-bold mb-2">{{ item?.title }}</h2>
                     <div class="text-gray-600 mb-2 clamp-5-lines" v-html="item?.content"></div>
                     <div class="text-sm text-gray-500 flex justify-between items-center">
-                      <span>By {{ item?.full_name ?? 'Admin' }}</span> •
+                      <span v-if="item?.is_anonymous">By {{ item?.name_anonymous ?? 'Ẩn danh' }}</span>
+                      <span v-else >By {{ item?.full_name ?? 'Admin' }}</span> •
+
                       <span>{{ new Date(item.created_at).toLocaleString() }}</span> •
                       <span>{{ fakeView() }} 👍</span>
                     </div>

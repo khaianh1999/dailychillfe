@@ -5,6 +5,36 @@
             <p class="text-center mb-6">Hãy tích cực tạo bài viết hay để nhận được 🪙 nhé !!!</p>
             <div class="bg-white p-6 rounded-xl shadow-md">
                 <form @submit.prevent="addNewPost" class="space-y-6">
+                    <!-- 🆕 Đăng ẩn danh (toggle) -->
+                    <label class="flex items-center cursor-pointer">
+                        <input
+                            id="isAnonymous"
+                            type="checkbox"
+                            v-model="newPost.is_anonymous"
+                            class="sr-only"
+                        />
+                        <div class="toggle-switch ml-0.5"></div>
+                        <span class="ml-3 text-sm font-medium text-gray-700">Đăng ẩn danh</span>
+                    </label>
+
+
+                    <!-- 🆕 Tên ẩn danh (hiện khi đã chọn) -->
+                    <transition name="fade">
+                        <div v-if="newPost.is_anonymous" class="space-y-2">
+                        <label for="name_anonymous" class="block mb-2 text-sm font-medium text-gray-700"
+                            >Tên hiển thị khi ẩn danh</label
+                        >
+                        <input
+                            v-model="newPost.name_anonymous"
+                            type="text"
+                            id="name_anonymous"
+                            placeholder="Ví dụ: Bé Cỏ"
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
+                        />
+                        </div>
+                    </transition>
+
                     <div>
                         <label for="title" class="block mb-2 text-sm font-medium text-gray-700">Tiêu đề</label>
                         <input v-model="newPost.title" type="text" id="title" required
@@ -34,9 +64,8 @@
                         <client-only>
                             <ckeditor v-if="editor" :editor="editor" v-model="newPost.content" :config="editorConfig" />
                         </client-only>
-                        <!-- <textarea v-model="newPost.content" id="content" rows="6" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"></textarea> -->
                     </div>
+       
 
                     <input type="hidden" v-model="newPost.updated_by" />
 
@@ -85,7 +114,9 @@ export default {
                 title: '',
                 content: '',
                 selectedCategoryIds: [],
-                updated_by: this.$auth?.user?.id || null
+                updated_by: this.$auth?.user?.id || null,
+                is_anonymous: false,          // boolean
+                name_anonymous: ''            // string
             },
             selectedAddFile: null,
             categories: [], // Assume fetched from API
@@ -146,6 +177,10 @@ export default {
             const categoryIdsString = (data.selectedCategoryIds || []).join(',');
             formData.append('category_ids', categoryIdsString);
 
+            // ✅ Thêm 2 trường mới
+            formData.append('is_anonymous', data.is_anonymous ? '1' : '0');
+            formData.append('name_anonymous', data.name_anonymous || '');
+
             if (file) {
                 let processedFile = file;
 
@@ -187,6 +222,17 @@ export default {
                 this.showToast('Bạn đã đăng tối đa 5 bài viết hôm nay. Hãy quay lại vào ngày mai nhé!', 'error');
                 this.isSubmitting = false;
                 return;
+            }
+            // Kiểm tra ẩn danh
+            if (this.newPost.is_anonymous) {
+                if (!this.newPost.name_anonymous || !this.newPost.name_anonymous.trim()) {
+                    this.showToast('Vui lòng nhập tên hiển thị khi đăng ẩn danh.', 'error');
+                    this.isSubmitting = false;
+                    return;
+                }
+            } else {
+                // Nếu không phải ẩn danh thì xóa luôn name_anonymous (clear client-side)
+                this.newPost.name_anonymous = '';
             }
 
             // Kiểm tra dữ liệu trước khi gửi
@@ -272,4 +318,35 @@ export default {
 
 <style scoped>
 /* Tailwind được sử dụng nên style chỉ cần bổ sung rất ít */
+
+/* assets/css/transition.css */
+.toggle-switch {
+  width: 44px;
+  height: 24px;
+  background-color: #d1d5db; /* bg-gray-300 */
+  border-radius: 9999px;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.toggle-switch::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 9999px;
+  transition: transform 0.3s;
+}
+
+/* Khi checkbox được check, thay đổi màu và trượt */
+input[type='checkbox']:checked + .toggle-switch {
+  background-color: #8b4513; /* màu vàng Tailwind: bg-yellow-400 */
+}
+
+input[type='checkbox']:checked + .toggle-switch::before {
+  transform: translateX(20px);
+}
 </style>
