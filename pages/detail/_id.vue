@@ -5,6 +5,7 @@
           :src="getUrlImage(dataRender?.image_url)"
           alt="Outdoor cooking hacks"
           class="w-full h-64 object-cover"
+          loading="lazy"
         />
   
         <div class="p-6 sm:p-8">

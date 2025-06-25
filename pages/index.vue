@@ -48,7 +48,13 @@
               class="break-inside-avoid bg-white rounded-xl shadow-md border border-gray-200 p-4 mb-4">
               <div class="blog-card">
                 <nuxt-link :to="`/detail/${item.id}`" class="block">
-                  <img :src="getUrlImage(item)" alt="Outdoor cooking hacks" class="w-full h-auto rounded-lg" />
+                  <!-- <img :src="getUrlImage(item)" alt="Outdoor cooking hacks" class="w-full h-auto rounded-lg" /> -->
+                  <img
+                    :src="getUrlImage(item)"
+                    alt="dailychill"
+                    class="w-full h-auto rounded-lg"
+                    loading="lazy"
+                  />
                   <div class="p-4">
                     <h2 class="text-xl font-bold mb-2">{{ item?.title }}</h2>
                     <div class="text-gray-600 mb-2 clamp-5-lines" v-html="item?.content"></div>

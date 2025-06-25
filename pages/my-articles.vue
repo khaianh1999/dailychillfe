@@ -14,7 +14,7 @@
                     <component :is="item.status == 1 ? 'nuxt-link' : 'div'"
                         :to="item.status == 1 ? `/detail/${item.id}` : null" class="block cursor-pointer"
                         :class="{ 'opacity-60 pointer-events-none': item.status == 0 }">
-                        <img :src="getUrlImage(item)" alt="" class="rounded-lg w-full mb-4" />
+                        <img :src="getUrlImage(item)" alt="dailychill" class="rounded-lg w-full mb-4" loading="lazy"/>
                         <h2 class="text-xl font-semibold text-gray-800">{{ item.title }}</h2>
                         <p class="text-sm text-gray-600 clamp-5-lines" v-html="item.content"></p>
                         <div class="mt-2 text-sm text-gray-500 flex justify-between">

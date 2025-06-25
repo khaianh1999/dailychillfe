@@ -15,7 +15,7 @@
                 @click="openBuyPopup(product)"
                 class="cursor-pointer bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden border">
 
-                <img :src="DOMAIN+product?.image_urls[0]" alt="product image" class="w-full h-48 object-cover" />
+                <img :src="DOMAIN+product?.image_urls[0]" alt="dailychill" class="w-full h-48 object-cover" loading="lazy" />
                 <div class="p-4">
                     <h3 class="font-semibold text-xl">{{ product?.name }}</h3>
                     <p class="text-gray-500 text-lg">{{ product?.description }}</p>
