@@ -1,5 +1,6 @@
 require('dotenv').config();
 export default {
+  ssr: true,
   server: {
     port: 3011, // Hoặc bất kỳ port nào bạn muốn
     host: '0.0.0.0'

@@ -36,7 +36,9 @@
   </template>
   
   <script>
+  import main from "~/mixins/main";
   export default {
+    mixins: [main],
     data() {
       return {
         toast: { // Hệ thống thông báo toast
