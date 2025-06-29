@@ -52,6 +52,10 @@
     },
     methods: {
       async submitComment() {
+        if (!this.full_name) {
+          this.showToast('Vui lòng đăng nhập!', 'error');
+          return;
+        }
         if (this.full_name && this.content) {
           this.$emit('add-comment', {
             id: Date.now(),
