@@ -5,6 +5,7 @@
   
       <input
         v-model="full_name"
+        disabled
         type="text"
         placeholder="Tên của bạn"
         class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-main"
@@ -43,7 +44,7 @@
           message: '',
           type: '', // 'success' or 'error'
         },
-        full_name: '',
+        full_name: this.$store.getters['user/user']?.full_name ?? '',
         content: '',
       };
     },
@@ -70,15 +71,24 @@
             this.showToast('Không tìm thấy ID bài viết.', 'error');
             return;
           }
+          const token = this.getCookie("token_user") ?? "";
+          if (!token) {
+            this.showToast('Vui lòng đăng nhập!', 'error');
+            return;
+          }
 
           const commentPayload = {
               content: this.content,
               article_id: parseInt(this.$route.params.id), // Lấy article_id từ URL
-              user_id: 1, // FAKE: Trong thực tế, user_id nên lấy từ thông tin người dùng đã đăng nhập (JWT, session, v.v.)
+              // user_id: 1, // FAKE: Trong thực tế, user_id nên lấy từ thông tin người dùng đã đăng nhập (JWT, session, v.v.)
               parent_id: null, // Nếu có parent_id (khi trả lời comment khác)
           };
           // Gửi yêu cầu POST đến endpoint tạo bình luận
-          const response = await this.$axios.$post('/comments', commentPayload); 
+          const response = await this.$axios.$post(`/comments`, commentPayload, {
+              headers: {
+                  Authorization: `Bearer ${token}`,
+              }
+          })
           
           this.showToast('Bình luận thành công!', 'success');
           this.content ="";
