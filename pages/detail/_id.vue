@@ -21,7 +21,7 @@
             <span>•</span>
             <span>{{ new Date(dataRender?.created_at).toLocaleString() }}</span>
             <span>•</span>
-            <span>{{ fakeView() }}👍</span>
+            <span>{{ fakeView() }}views</span>
           </div>
   
           <!-- Content -->

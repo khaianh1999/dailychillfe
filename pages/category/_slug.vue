@@ -56,7 +56,7 @@
                                             <span v-if="item?.is_anonymous">By {{ item?.name_anonymous ?? 'Ẩn danh' }}</span>
                                             <span v-else >By {{ item?.full_name ?? 'Admin' }}</span> •
                                             <span>{{ new Date(item.created_at).toLocaleString() }}</span> •
-                                            <span>{{ fakeView() }} 👍</span>
+                                            <span>{{ fakeView() }} views</span>
                                         </div>
                                     </div>
                                 </nuxt-link>

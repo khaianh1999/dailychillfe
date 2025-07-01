@@ -62,8 +62,28 @@ export default {
         return `${diffYear} năm trước`;
       },
       fakeView() {
-        return Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
-      }
+        const random = Math.random();
+      
+        let views;
+        if (random < 0.6) {
+          // 60% khả năng trong khoảng 100 - 1,000
+          views = Math.floor(Math.random() * 900) + 100;
+        } else if (random < 0.9) {
+          // 30% khả năng trong khoảng 1,000 - 10,000
+          views = Math.floor(Math.random() * 9000) + 1000;
+        } else {
+          // 10% khả năng trong khoảng 10,000 - 50,000
+          views = Math.floor(Math.random() * 40000) + 10000;
+        }
+      
+        // Format số có chữ 'x'
+        if (views >= 1000) {
+          const formatted = (views / 1000).toFixed(views >= 10000 ? 0 : 1);
+          return `${formatted}x`;
+        } else {
+          return `${views}x`;
+        }
+      },
       // fakeView(isoTime) {
       //   const createdAt = new Date(isoTime);
       //   const now = new Date();
