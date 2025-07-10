@@ -2,6 +2,7 @@
     <div class="container mx-auto px-4 py-8 mt-8 md:mt-16">
         <h1 class="text-2xl font-bold mb-2 lg:mb-6 text-center">Danh sách sản phẩm</h1>
         <p class="font-semibold text-gray-500 text-xl text-center mb-6">Hãy tích cực chia sẻ mã giới thiệu để nhận được 🎁 nhé !!</p>
+        <div>Hãy kêu gọi bạn bè nhập mã giới thiệu của bạn để bạn nhận coin đổi quà nhé!!</div>
         <div class="text-right mb-6" v-if="IsLogin">
             <router-link to="/list-my-order">
                 <button class="bg-main text-white py-2 px-4 rounded-lg shadow transition">

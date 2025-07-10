@@ -28,6 +28,13 @@
                             Nhập mã giới thiệu
                         </button>
                     </div>
+                    <!-- sang màn trang chủ -->
+                    <div class="mt-6">
+                        <button @click="goToHome"
+                            class="bg-main hover:bg-textmain text-white font-medium py-2 px-4 rounded-xl shadow transition">
+                            Về trang chủ
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -147,6 +154,9 @@ export default {
             } catch (err) {
                 alert(err.message);
             }
+        },
+        goToHome() {
+            this.$router.push("/");
         }
     },
 }

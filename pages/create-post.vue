@@ -80,7 +80,7 @@
                 </form>
             </div>
             <!-- Toast/Notification System -->
-            <div v-if="toast.show" class="fixed bottom-4 right-4 p-4 rounded-lg shadow-lg text-white"
+            <div v-if="toast.show" id="toast_create_post" class="fixed bottom-4 right-4 p-4 rounded-lg shadow-lg text-white"
                 :class="toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'">
                 {{ toast.message }}
             </div>
@@ -348,5 +348,9 @@ input[type='checkbox']:checked + .toggle-switch {
 
 input[type='checkbox']:checked + .toggle-switch::before {
   transform: translateX(20px);
+}
+
+#toast_create_post {
+    z-index: 100000;
 }
 </style>
